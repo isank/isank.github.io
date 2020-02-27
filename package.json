@@ -1,0 +1,49 @@
+{
+  "name": "isank.github.io",
+  "version": "1.0.0",
+  "description": "Isank's Portfolio",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "gatsby clean",
+    "develop": "gatsby develop",
+    "build": "gatsby build",
+    "format": "prettier --write './*.js' 'src/**/*.js' 'src/**/*.jsx'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codeghoul/isank.github.io.git"
+  },
+  "keywords": [
+    "gatsby",
+    "react",
+    "portfolio",
+    "blog",
+    "minimal"
+  ],
+  "author": "Jayesh Patel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codeghoul/isank.github.io/issues"
+  },
+  "homepage": "https://github.com/codeghoul/isank.github.io#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.9.4",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.44",
+    "gatsby": "^2.19.20",
+    "gatsby-plugin-layout": "^1.1.22",
+    "gatsby-plugin-react-helmet": "^3.1.22",
+    "gatsby-remark-images": "^3.1.44",
+    "gatsby-source-filesystem": "^2.1.48",
+    "gatsby-transformer-remark": "^2.6.53",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-helmet": "^5.2.1",
+    "react-icons": "^3.9.0",
+    "react-spring": "^8.0.27"
+  },
+  "devDependencies": {
+    "prettier-eslint": "^9.0.1"
+  }
+}
