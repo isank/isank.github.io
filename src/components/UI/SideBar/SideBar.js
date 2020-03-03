@@ -92,7 +92,7 @@ const SideBar = props => {
       <Grid item>
         <Avatar className={classes.large}>JD</Avatar>
         <Typography variant="h6" component="h6" gutterBottom>
-          Jack Daniels
+          Isank Agarwal
         </Typography>
         <Typography paragraph>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
