@@ -108,4 +108,7 @@ dist/
 tmp/
 temp/
 
+# Eleventy _site
+_site
+
 # End of https://www.gitignore.io/api/node
