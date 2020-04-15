@@ -52,7 +52,9 @@
         </div>
       </div>
       <div class="flex-1 lg:h-screen p-3 sm:p-3 md:p-6 lg:p-12 overflow-y-auto">
-        {{ content }}
+        <div {% if templateClass %} class="{{ templateClass }}" {% endif %}>
+          {{ content }}
+        </div>
       </div>
     </div>
   </body>
