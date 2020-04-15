@@ -1,4 +1,5 @@
 {
   "layout": "layout.html",
-  "tags": "posts"
+  "tags": "posts",
+  "templateClass": "markdown"
 }
