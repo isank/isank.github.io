@@ -8,7 +8,7 @@ const plugins = [autoprefixer, tailwindcss, cssnano({ preset: "default" })];
 if (process.env.NODE_ENV === "production") {
   plugins.push(
     purgecss({
-      content: ["./_site/**/*.html"],
+      content: ["./**/*.html"],
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     })
   );
