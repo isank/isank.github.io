@@ -111,4 +111,5 @@ temp/
 # Eleventy _site
 _site
 
-# End of https://www.gitignore.io/api/node
+# Operating System files
+.DS_Store
