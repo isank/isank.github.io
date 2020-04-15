@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "styles:dev": "postcss ./css/styles.css --replace",
-    "dev": "npm run styles:dev && eleventy --serve"
+    "styles": "postcss ./css/styles.css -o ./css/processed/styles.css",
+    "dev": "npm run styles && eleventy --serve"
   },
   "keywords": [],
   "author": "",

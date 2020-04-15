@@ -110,6 +110,7 @@ temp/
 
 # Eleventy _site
 _site
+css/processed
 
 # Operating System files
 .DS_Store
