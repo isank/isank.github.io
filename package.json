@@ -1,17 +1,23 @@
 {
-  "name": "blog",
+  "name": "isank.github.io",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Isank's Blog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/isank/isank.github.io.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "styles": "postcss ./css/styles.css -o ./css/processed/styles.css",
     "dev": "npm run styles && eleventy --serve",
     "prod": "npm run styles && eleventy && gh-pages -u \"Isank <isankagarwal@gmail.com>\" -d _site -r https://$REPO_TOKEN@github.com/isank/isank.github.io.git -b master"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "isank",
+    "blog"
+  ],
+  "author": "Isank <isankagarwal@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "@11ty/eleventy": "^0.10.0",
     "@fullhuman/postcss-purgecss": "^2.1.2",
