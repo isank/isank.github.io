@@ -3,16 +3,17 @@ layout: layout.html
 title: Isank's Blog
 pagination:
   data: collections.posts
-  size: 4
+  size: 2
   alias: posts
+  reverse: true
 ---
 
 {% for post in posts %}
 
 <article class="mb-10 text-justify">
   <header class="mb-5">
-    <h2 class="font-bold text-gray-900 text-3xl hover:underline">
-      <a href="{{post.url}}">{{post.data.title}}</a>
+    <h2 class="font-bold text-gray-900 text-3xl">
+      <a class="hover:underline" href="{{post.url}}">{{post.data.title}}</a>
     </h2>
     <span class="font-light text-sm text-gray-600">
       {{post.date | date: "%b %d, %Y"}}
@@ -23,12 +24,30 @@ pagination:
   </p>
 </article>
 
-{% endfor %} {% if pagination.href.previous %}
+{% endfor %}
 
-<a href="{{pagination.href.previous}}">← PREV</a>
+<div class="flex justify-between font-bold text-3xl">
+  {% if pagination.href.previous %}
 
-{% endif %} {% if pagination.href.next %}
+  <div>
+    <a
+      href="{{pagination.href.previous}}"
+      class="text-gray-900 hover:text-gray-800"
+    >
+      <span>← PREV</span>
+    </a>
+  </div>
 
-<a href="{{pagination.href.next}}">NEXT →</a>
+  {% endif %} {% if pagination.href.next %}
 
-{% endif %}
+  <div>
+    <a
+      href="{{pagination.href.next}}"
+      class="text-gray-900 hover:text-gray-800"
+    >
+      <span>NEXT →</span>
+    </a>
+  </div>
+
+  {% endif %}
+</div>
