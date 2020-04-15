@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "styles": "npx postcss ./css/styles.css -o ./css/processed/styles.css",
+    "styles": "postcss ./css/styles.css -o ./css/processed/styles.css",
     "dev": "rm -rf ./_sites && npm run styles && eleventy --serve",
     "prod": "npm run styles && eleventy && gh-pages -u \"Isank <isankagarwal@gmail.com>\" -d _site -r https://$REPO_TOKEN@github.com/isank/isank.github.io.git -b master"
   },
@@ -24,7 +24,9 @@
     "cssnano": "^4.1.10",
     "cssnano-preset-advanced": "^4.0.7",
     "gh-pages": "^2.2.0",
-    "postcss-cli": "^7.1.0",
     "tailwindcss": "^1.2.0"
+  },
+  "dependencies": {
+    "postcss-cli": "^7.1.0"
   }
 }
