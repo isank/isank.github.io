@@ -20,7 +20,7 @@ jobs:
       - name: deployment commands
         env:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
-          NODE_ENV: "production"
+          NODE_ENV: "prod"
         run: |
           npm ci
           npm run prod

@@ -5,7 +5,7 @@ const autoprefixer = require("autoprefixer");
 
 const plugins = [autoprefixer, tailwindcss, cssnano({ preset: "default" })];
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "prod") {
   plugins.push(
     purgecss({
       content: ["./**/*.html"],
