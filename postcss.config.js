@@ -9,6 +9,8 @@ if (process.env.NODE_ENV === "prod") {
   plugins.push(
     purgecss({
       content: ["./**/*.html"],
+      whitelistPatterns: [/markdown$/],
+      whitelistPatternsChildren: [/markdown$/],
       defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     })
   );
