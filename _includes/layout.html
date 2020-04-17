@@ -7,62 +7,110 @@
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
-    <div class="lg:flex md:flex-none">
-      <div class="flex-1 lg:max-w-xs lg:h-screen bg-red-100">
-        <div class="p-3 sm:p-3 md:p-6 lg:p-12">
-          <div class="">
-            <img
-              class="rounded-full mx-1 h-16 w-16"
-              src="{{author.picture}}"
-              alt=""
-            />
-          </div>
-          <div>
-            <h1 class="font-medium text-xl mt-6 mx-1">
-              {{ author.name }}
-            </h1>
-            <p class="font-light mt-1 mx-1">{{ author.bio }}</p>
-          </div>
-          <div>
-            <nav class="font-medium mt-6 mx-1">
-              <ul>
-                <li class="hover:underline">
-                  <a href="/">Posts</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <div>
-            <ul class="flex mt-6 mx-1">
-              {% for account in author.socialAccounts %}
-              <li class="list-none mr-2">
-                <a class="inline-block h-8 w-8" href="{{account.link}}">
-                  <svg
-                    class="fill-current text-gray-900"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    {{ account.svg }}
-                  </svg>
+    <div class="flex flex-col lg:flex-row">
+      <div
+        class="w-screen max-w-screen lg:max-w-xs lg:h-screen bg-red-100 fixed lg:relative"
+      >
+        <div class="w-full">
+          <div class="flex flex-col w-full p-4 lg:p-12">
+            <div class="flex flex-row w-full items-center justify-between">
+              <div class="lg:mt-3">
+                <a href="/">
+                  <img
+                    class="rounded-full h-8 w-8 lg:h-16 lg:w-16"
+                    src="{{author.picture}}"
+                    alt="author profile picture"
+                  />
                 </a>
-              </li>
-              {% endfor %}
-            </ul>
+              </div>
+              <button id="menu-show-btn" class="lg:hidden h-6 w-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  class=""
+                >
+                  <path
+                    d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"
+                  />
+                </svg>
+              </button>
+
+              <button id="menu-hide-btn" class="hidden h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path
+                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div id="menu" class="hidden lg:block">
+              <div>
+                <h1 class="font-medium text-xl mt-6">
+                  {{ author.name }}
+                </h1>
+                <p class="font-light mt-1">{{ author.bio }}</p>
+              </div>
+              <div>
+                <nav class="font-medium mt-6">
+                  <ul>
+                    <li class="hover:underline">
+                      <a href="/">Posts</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div>
+                <ul class="flex mt-6">
+                  {% for account in author.socialAccounts %}
+                  <li class="list-none mr-2">
+                    <a class="inline-block h-8 w-8" href="{{account.link}}">
+                      <svg
+                        class="fill-current text-gray-900"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                      >
+                        {{ account.svg }}
+                      </svg>
+                    </a>
+                  </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="text-center hidden lg:block">
-          <span
-            class="text-xs text-gray-500 font-hairline subpixel-antialiased"
-          >
-            &copy; 2020 Isank Agarwal. All rights reserved.
-          </span>
+          <div class="text-center hidden lg:block">
+            <span
+              class="text-xs text-gray-500 font-hairline subpixel-antialiased"
+            >
+              &copy; 2020 Isank Agarwal. All rights reserved.
+            </span>
+          </div>
         </div>
       </div>
-      <div class="flex-1 lg:h-screen p-3 sm:p-3 md:p-6 lg:p-12 overflow-y-auto">
-        <div {% if templateClass %} class="{{ templateClass }}" {% endif %}>
+      <div class="w-screen max-w-screen lg:h-screen overflow-y-auto">
+        <div
+          class="px-3 pb-3 pt-20 lg:p-12 {% if templateClass %} {{ templateClass }}{% endif %}"
+        >
           {{ content }}
         </div>
       </div>
     </div>
+    <script>
+      const idSelect = function (id) {
+        return document.getElementById(id);
+      };
+      const toggle = function toggle(element, clazz) {
+        element.classList.toggle(clazz);
+      };
+      const menuShowBtn = idSelect("menu-show-btn");
+      const menuHideBtn = idSelect("menu-hide-btn");
+      const menuToggle = function () {
+        toggle(idSelect("menu"), "hidden");
+        toggle(menuShowBtn, "hidden");
+        toggle(menuHideBtn, "hidden");
+      };
+      menuShowBtn.addEventListener("click", menuToggle);
+      menuHideBtn.addEventListener("click", menuToggle);
+    </script>
   </body>
 </html>
