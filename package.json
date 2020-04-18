@@ -10,7 +10,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "styles": "postcss ./css/styles.css -o ./css/processed/styles.css",
     "dev": "rm -rf ./_site && npm run styles && eleventy --serve",
-    "prod": "npm run styles && eleventy && gh-pages -u \"Isank <isankagarwal@gmail.com>\" -d _site -r https://$REPO_TOKEN@github.com/isank/isank.github.io.git -b master"
+    "prod": "npm run styles && eleventy && cp LICENSE.txt _site && gh-pages -u \"Isank <isankagarwal@gmail.com>\" -d _site -r https://$REPO_TOKEN@github.com/isank/isank.github.io.git -b master"
   },
   "keywords": [
     "isank",
