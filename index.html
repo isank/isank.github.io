@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Isank's Blog</title>
+    <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body>
@@ -148,7 +149,7 @@
       <a class="hover:underline" href="/posts/hello_world/">Hello, World!</a>
     </h1>
     <span class="font-light text-sm text-gray-600">
-      Apr 17, 2020
+      Apr 18, 2020
     </span>
   </header>
   <p class="font-light text-gray-800">
@@ -165,22 +166,6 @@
         </div>
       </div>
     </div>
-    <script>
-      const idSelect = function (id) {
-        return document.getElementById(id);
-      };
-      const toggle = function toggle(element, clazz) {
-        element.classList.toggle(clazz);
-      };
-      const menuShowBtn = idSelect("menu-show-btn");
-      const menuHideBtn = idSelect("menu-hide-btn");
-      const menuToggle = function () {
-        toggle(idSelect("menu"), "hidden");
-        toggle(menuShowBtn, "hidden");
-        toggle(menuHideBtn, "hidden");
-      };
-      menuShowBtn.addEventListener("click", menuToggle);
-      menuHideBtn.addEventListener("click", menuToggle);
-    </script>
+    <script src="/js/menuToggle.js"></script>
   </body>
 </html>
