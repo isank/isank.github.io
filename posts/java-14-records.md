@@ -3,7 +3,19 @@ title: Java records demystified
 description: A guide to what records (a preview feature) in Java 14 offers
 ---
 
-# {{ title }}
+<article>
+  <header>
+    <h1 class="font-bold text-gray-900 text-3xl">
+      {{ title }}
+    </h1>
+    <span class="font-light text-sm text-gray-600">
+      {{ page.date | date: "%b %d, %Y" }} - 
+    </span>
+    <span class="font-light text-sm text-gray-600">
+      {{author.name}}
+    </span>
+  </header>
+</article>
 
 Java has always been verbose and almost all of us have accepted the fact and are used to its verbosity. We generally take the help of our super-intelligent IDEs or libraries like [lombok](https://projectlombok.org/) to generate most of the boilerplate code.
 
@@ -110,7 +122,7 @@ public class Application {
     }
 }
 
-// output 
+// output
 point1.equals(point2) = true
 ```
 
@@ -132,7 +144,7 @@ record Point(int x, int y) extends SomeClass {}; // Error - not allowed
 record Point(int x, int y) extends SomeClass {
     private final int z; // Error - not allowed
     private int z; // Error - not allowed
-}; 
+};
 ```
 
 ## Features
@@ -144,18 +156,18 @@ Apart from the restrictions above, records do behave like normal classes
 ```java
 // Point.java
 record Point(int x, int y) {
-    
+
     public static final double PI = 3.14; // allowed
-    
+
     // allowed
     public static double getPI() {
-        
+
         return PI;
     }
-    
+
     // allowed
     static {
-        
+
         System.out.println("Printed in a static initializer");
     }
 };
@@ -166,10 +178,10 @@ record Point(int x, int y) {
 ```java
 // Point.java
 record Point(int x, int y) {
-    
+
     // allowed
     public int add() {
-        
+
         return x + y;
     }
 };
@@ -185,7 +197,7 @@ record Point(int x, int y) {
     public Point {
 
         if (x < y) {
-            
+
             throw new IllegalArgumentException("x cannot be less than y");
         }
     }
