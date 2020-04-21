@@ -38,8 +38,12 @@
   @apply font-bold;
 }
 
+.markdown > article.post-title > header {
+  @apply mb-6 pb-2;
+}
+
 .markdown h1 {
-  @apply font-bold text-gray-900 text-3xl pb-2 mb-6;
+  @apply font-bold text-gray-900 text-3xl;
 }
 
 .markdown h2 {

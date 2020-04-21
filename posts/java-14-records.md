@@ -1,15 +1,16 @@
 ---
 title: Java records demystified
 description: A guide to what records (a preview feature) in Java 14 offers
+date: 2020-04-21
 ---
 
-<article>
+<article class="post-title">
   <header>
     <h1 class="font-bold text-gray-900 text-3xl">
       {{ title }}
     </h1>
     <span class="font-light text-sm text-gray-600">
-      {{ page.date | date: "%b %d, %Y" }} - 
+      {{ page.date | toUTCString | date: "%b %d, %Y" }} - 
     </span>
     <span class="font-light text-sm text-gray-600">
       {{author.name}}

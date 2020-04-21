@@ -23,6 +23,10 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.setLibrary("md", markdownIt(markdownOptions));
 
+  eleventyConfig.addLiquidFilter("toUTCString", (date) =>
+    new Date(date).toUTCString()
+  );
+
   eleventyConfig.addPassthroughCopy({ "css/processed": "css" });
   eleventyConfig.addPassthroughCopy("assets");
   eleventyConfig.addPassthroughCopy("js");
