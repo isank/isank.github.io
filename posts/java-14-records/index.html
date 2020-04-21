@@ -6,6 +6,10 @@
     <title>Java records demystified</title>
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/ir-black.min.css"
+    />
   </head>
   <body>
     <div class="flex flex-col lg:flex-row">
@@ -160,20 +164,21 @@
 <blockquote>
 <p>Remember, records are still a preview feature and you'll have to use the <code>--enable-preview</code> flag (explained below) when compiling/executing the programs from this post. You will also need <a href="https://jdk.java.net/14/">JDK 14</a>.</p>
 </blockquote>
-<pre><code class="language-shell">javac --release 14 --enable-preview Example.java
+<pre class="hljs"><code>javac --release 14 --<span class="hljs-built_in">enable</span>-preview Example.java
 </code></pre>
-<pre><code class="language-shell">java --enable-preview Example
+<pre class="hljs"><code>java --<span class="hljs-built_in">enable</span>-preview Example
 </code></pre>
 <h2>Create a record</h2>
 <p>Here is a record in its simplest form.</p>
-<pre><code class="language-java"><span class="hljs-comment">// Point.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
 <span class="hljs-function">record <span class="hljs-title">point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span>{};
 </code></pre>
 <p>Yes, that's it. Yes, it's Java. Yes, pure Java. No, no libraries, annotations or frameworks.</p>
 <p>A record has a name (<code>Point</code> in this case), state description which declares the components (<code>(int x, int y)</code>) and an optional body (notice <code>{}</code>).</p>
 <p>Now, let's see what Java generates for you after you compile your code.</p>
-<pre><code class="language-java"><span class="hljs-comment">// decompiled Point.class</span>
+<pre class="hljs"><code><span class="hljs-comment">// decompiled Point.class</span>
 <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">java</span>.<span class="hljs-title">lang</span>.<span class="hljs-title">Record</span> </span>{
+
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> x;
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> y;
 
@@ -201,7 +206,7 @@
 <p>Superb! right?</p>
 <h2>How to use records?</h2>
 <p>records enjoy all the benefits of a Java class with some restrictions (which we will see later on). That said, a record can be instantiated with the <code>new</code> keyword and the methods can be accessed like any other object's.</p>
-<pre><code class="language-java"><span class="hljs-comment">// Application.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Application.java</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>{
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
@@ -221,7 +226,7 @@ point.y = <span class="hljs-number">4</span>
 </code></pre>
 <h2>Equality in records</h2>
 <p>As we saw earlier, a record implicitly generates <code>hashCode</code> and <code>equals</code> and if we go by this default implementation, then, two records are equal to each other when they're of the same type and contain the same state. An example will make it more clear</p>
-<pre><code class="language-java"><span class="hljs-comment">// Application.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Application.java</span>
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>{
 
     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
@@ -243,12 +248,13 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <ol>
 <li>they cannot extend any other class</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> extends SomeClass </span>{}; <span class="hljs-comment">// Error - not allowed</span>
+<pre class="hljs"><code><span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> extends SomeClass </span>{}; <span class="hljs-comment">// Error - not allowed</span>
 </code></pre>
 <ol start="2">
 <li>they cannot have explicit instance variables other than the private final fields which are the part of components of the state description</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> extends SomeClass </span>{
+<pre class="hljs"><code><span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> extends SomeClass </span>{
+
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> z; <span class="hljs-comment">// Error - not allowed</span>
     <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> z; <span class="hljs-comment">// Error - not allowed</span>
 };
@@ -258,7 +264,7 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <ol>
 <li>they can have static fields, methods, initializers</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-comment">// Point.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
 <span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
 
     <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">double</span> PI = <span class="hljs-number">3.14</span>; <span class="hljs-comment">// allowed</span>
@@ -279,7 +285,7 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <ol start="2">
 <li>they can have instance methods</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-comment">// Point.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
 <span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
 
     <span class="hljs-comment">// allowed</span>
@@ -292,7 +298,7 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <ol start="3">
 <li>they can have explicit canonical constructors without a formal parameter list. This allows performing validations &amp; normalizations</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-comment">// Point.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
 <span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> </span>{
 
     <span class="hljs-comment">// allowed</span>
@@ -308,7 +314,7 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <ol start="4">
 <li>Yes, they can be generic too</li>
 </ol>
-<pre><code class="language-java"><span class="hljs-comment">// Point.java</span>
+<pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
 record Point&lt;T&gt;(T x, T y) {};
 
 <span class="hljs-comment">// Application.java</span>
