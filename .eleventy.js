@@ -6,7 +6,14 @@ module.exports = function (eleventyConfig) {
     highlight: function (str, lang) {
       if (lang && highlightJs.getLanguage(lang)) {
         try {
-          return highlightJs.highlight(lang, str).value;
+          return (
+            '<pre class="hljs"><code>' +
+            highlightJs.highlight(lang, str, true).value +
+            "</code></pre>"
+          );
+          // let c = highlightJs.highlight(lang, str).value;
+          // console.log(c);
+          // return c;
         } catch (__) {}
       }
 

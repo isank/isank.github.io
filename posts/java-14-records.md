@@ -27,11 +27,11 @@ _records_ are a new type declaration in Java. But, before we move ahead let me m
 
 > Remember, records are still a preview feature and you'll have to use the `--enable-preview` flag (explained below) when compiling/executing the programs from this post. You will also need [JDK 14](https://jdk.java.net/14/).
 
-```shell
+```bash
 javac --release 14 --enable-preview Example.java
 ```
 
-```shell
+```bash
 java --enable-preview Example
 ```
 
@@ -53,6 +53,7 @@ Now, let's see what Java generates for you after you compile your code.
 ```java
 // decompiled Point.class
 final class Point extends java.lang.Record {
+
     private final int x;
     private final int y;
 
@@ -142,6 +143,7 @@ record Point(int x, int y) extends SomeClass {}; // Error - not allowed
 
 ```java
 record Point(int x, int y) extends SomeClass {
+
     private final int z; // Error - not allowed
     private int z; // Error - not allowed
 };
