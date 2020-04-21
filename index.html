@@ -16,7 +16,10 @@ pagination:
       <a class="hover:underline" href="{{post.url}}">{{post.data.title}}</a>
     </h1>
     <span class="font-light text-sm text-gray-600">
-      {{post.date | date: "%b %d, %Y"}}
+      {{post.date | date: "%b %d, %Y"}} - 
+    </span>
+    <span class="font-light text-sm text-gray-600">
+      {{author.name}}
     </span>
   </header>
   <p class="font-light text-gray-800">
