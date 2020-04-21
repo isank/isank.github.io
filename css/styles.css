@@ -75,11 +75,11 @@
 }
 
 .markdown pre {
-  @apply rounded p-4;
+  @apply rounded p-4 overflow-auto scrolling-touch scrolling-auto !important;
 }
 
 .markdown pre code {
-  @apply block bg-transparent p-0 overflow-auto rounded-none;
+  @apply block bg-transparent p-0 overflow-auto rounded-none !important;
 }
 
 .markdown ul {
