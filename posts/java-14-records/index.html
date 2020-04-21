@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello, World!</title>
+    <title>Java records, demystified</title>
     <link rel="shortcut icon" href="/assets/icons/favicon.ico" />
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
@@ -140,7 +140,176 @@
         <div
           class="px-4 pb-4 pt-20 lg:p-12  markdown"
         >
-          <h1>Hello, World!</h1>
+          <h1>Java records, demystified</h1>
+<p>Java has always been verbose and almost all of us have accepted the fact and are used to its verbosity. We generally take the help of our super-intelligent IDEs or libraries like <a href="https://projectlombok.org/">lombok</a> to generate most of the boilerplate code.</p>
+<p>Still, when it comes down to doing super simple things like creating a data carrier class (which is as dumb as it sounds), a simple DTO or a value object we always feel the need to have something quick and embedded in Java itself.</p>
+<h2>Presenting, records</h2>
+<p><em>records</em> are a new type declaration in Java. But, before we move ahead let me make it very clear that records are not something that has been introduced to address problems like boilerplate, properties class or annotation-driven code generation, etc. Instead, it has been designed with a more thoughtful goal of representing <em>data as data</em></p>
+<blockquote>
+<p>Remember, records are still a preview feature and you'll have to use the <code>--enable-preview</code> flag (explained below) when compiling/executing the programs from this post. You will also need <a href="https://jdk.java.net/14/">JDK 14</a>.</p>
+</blockquote>
+<pre><code class="language-shell">javac --release 14 --enable-preview Example.java
+</code></pre>
+<pre><code class="language-shell">java --enable-preview Example
+</code></pre>
+<h2>Create a record</h2>
+<p>Here is a record in its simplest form.</p>
+<pre><code class="language-java">// Point.java
+record point(int x, int y){};
+</code></pre>
+<p>Yes, that's it. Yes, it's Java. Yes, pure Java. No, no libraries, annotations or frameworks.</p>
+<p>A record has a name (<code>Point</code> in this case), state description which declares the components (<code>(int x, int y)</code>) and an optional body (notice <code>{}</code>).</p>
+<p>Now, let's see what Java generates for you after you compile your code.</p>
+<pre><code class="language-java">// decompiled Point.class
+final class Point extends java.lang.Record {
+    private final int x;
+    private final int y;
+
+    public Point(int x, int y) { /* compiled code */ }
+
+    public java.lang.String toString() { /* compiled code */ }
+
+    public final int hashCode() { /* compiled code */ }
+
+    public final boolean equals(java.lang.Object o) { /* compiled code */ }
+
+    public int x() { /* compiled code */ }
+
+    public int y() { /* compiled code */ }
+}
+</code></pre>
+<p>A lot of things are pretty evident from the code above</p>
+<ol>
+<li>records are implicitly immutable.</li>
+<li>a public all args constructor with signature same as the state description</li>
+<li>public getters</li>
+<li>implementation of hashCode &amp; equals</li>
+<li>implementation of toString</li>
+</ol>
+<p>Superb! right?</p>
+<h2>How to use records?</h2>
+<p>records enjoy all the benefits of a Java class with some restrictions (which we will see later on). That said, a record can be instantiated with the <code>new</code> keyword and the methods can be accessed like any other object's.</p>
+<pre><code class="language-java">// Application.java
+public class Application {
+
+    public static void main(String[] args) {
+
+        Point point = new Point(2, 4);
+
+        System.out.println(&quot;point = &quot; + point.toString());
+        System.out.println(&quot;point.x = &quot; + point.x());
+        System.out.println(&quot;point.y = &quot; + point.y());
+    }
+}
+
+// output
+point = Point[x=2, y=4]
+point.x = 2
+point.y = 4
+</code></pre>
+<h2>Equality in records</h2>
+<p>As we saw earlier, a record implicitly generates <code>hashCode</code> and <code>equals</code> and if we go by this default implementation, then, two records are equal to each other when they're of the same type and contain the same state. An example will make it more clear</p>
+<pre><code class="language-java">// Application.java
+public class Application {
+
+    public static void main(String[] args) {
+
+        Point point1 = new Point(1, 2);
+
+        Point point2 = new Point(1, 2);
+
+        System.out.println(&quot;point1.equals(point2) = &quot; + point1.equals(point2));
+    }
+}
+
+// output 
+point1.equals(point2) = true
+</code></pre>
+<p><code>point1</code> and <code>point2</code> are equal to each other for being of the same type (Point) and containing the same states (x = 1 &amp; y = 2)</p>
+<h2>Restrictions</h2>
+<p>records do have some restrictions as well</p>
+<ol>
+<li>they cannot extend any other class</li>
+</ol>
+<pre><code class="language-java">record Point(int x, int y) extends SomeClass {}; // Error - not allowed
+</code></pre>
+<ol start="2">
+<li>they cannot have explicit instance variables other than the private final fields which are the part of components of the state description</li>
+</ol>
+<pre><code class="language-java">record Point(int x, int y) extends SomeClass {
+    private final int z; // Error - not allowed
+    private int z; // Error - not allowed
+}; 
+</code></pre>
+<h2>Features</h2>
+<p>Apart from the restrictions above, records do behave like normal classes</p>
+<ol>
+<li>they can have static fields, methods, initializers</li>
+</ol>
+<pre><code class="language-java">// Point.java
+record Point(int x, int y) {
+    
+    public static final double PI = 3.14; // allowed
+    
+    // allowed
+    public static double getPI() {
+        
+        return PI;
+    }
+    
+    // allowed
+    static {
+        
+        System.out.println(&quot;Printed in a static initializer&quot;);
+    }
+};
+</code></pre>
+<ol start="2">
+<li>they can have instance methods</li>
+</ol>
+<pre><code class="language-java">// Point.java
+record Point(int x, int y) {
+    
+    // allowed
+    public int add() {
+        
+        return x + y;
+    }
+};
+</code></pre>
+<ol start="3">
+<li>they can have explicit canonical constructors without a formal parameter list. This allows performing validations &amp; normalizations</li>
+</ol>
+<pre><code class="language-java">// Point.java
+record Point(int x, int y) {
+
+    // allowed
+    public Point {
+
+        if (x &lt; y) {
+            
+            throw new IllegalArgumentException(&quot;x cannot be less than y&quot;);
+        }
+    }
+};
+</code></pre>
+<ol start="4">
+<li>Yes, they can be generic too</li>
+</ol>
+<pre><code class="language-java">// Point.java
+record Point&lt;T&gt;(T x, T y) {};
+
+// Application.java
+public class Application {
+
+    public static void main(String[] args) {
+
+        Point&lt;String&gt; point = new Point&lt;&gt;(&quot;A&quot;, &quot;B&quot;);
+    }
+}
+</code></pre>
+<h2>Final thoughts</h2>
+<p><em>records</em> being so less verbose and concise while still enjoying a normal class's features are a great addition to Java. Developers will surely find it beneficial at various places and will be able to move very quickly when representing data in their code.</p>
 
         </div>
       </div>
