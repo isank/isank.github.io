@@ -1,5 +1,5 @@
 ---
-title: Java records, demystified
+title: Java records demystified
 description: A guide to what records (a preview feature) in Java 14 offers
 ---
 
