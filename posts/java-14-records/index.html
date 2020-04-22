@@ -174,7 +174,7 @@
 <h2>Create a record</h2>
 <p>Here is a record in its simplest form.</p>
 <pre class="hljs"><code><span class="hljs-comment">// Point.java</span>
-<span class="hljs-function">record <span class="hljs-title">point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span>{};
+<span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span>{};
 </code></pre>
 <p>Yes, that's it. Yes, it's Java. Yes, pure Java. No, no libraries, annotations or frameworks.</p>
 <p>A record has a name (<code>Point</code> in this case), state description which declares the components (<code>(int x, int y)</code>) and an optional body (notice <code>{}</code>).</p>
@@ -200,7 +200,8 @@
 </code></pre>
 <p>A lot of things are pretty evident from the code above</p>
 <ol>
-<li>records are implicitly immutable.</li>
+<li>a record is just another class that extends <code>java.lang.Record</code></li>
+<li>records are implicitly immutable</li>
 <li>a public all args constructor with signature same as the state description</li>
 <li>public getters</li>
 <li>implementation of hashCode &amp; equals</li>
@@ -249,7 +250,7 @@ point1.equals(point2) = <span class="hljs-keyword">true</span>
 <h2>Restrictions</h2>
 <p>records do have some restrictions as well</p>
 <ol>
-<li>they cannot extend any other class</li>
+<li>they cannot extend any other class. That's because records implicitly extends <code>java.lang.Record</code></li>
 </ol>
 <pre class="hljs"><code><span class="hljs-function">record <span class="hljs-title">Point</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span> extends SomeClass </span>{}; <span class="hljs-comment">// Error - not allowed</span>
 </code></pre>
