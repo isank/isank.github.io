@@ -42,7 +42,7 @@ Here is a record in its simplest form.
 
 ```java
 // Point.java
-record point(int x, int y){};
+record Point(int x, int y){};
 ```
 
 Yes, that's it. Yes, it's Java. Yes, pure Java. No, no libraries, annotations or frameworks.
@@ -74,11 +74,12 @@ final class Point extends java.lang.Record {
 
 A lot of things are pretty evident from the code above
 
-1. records are implicitly immutable.
-2. a public all args constructor with signature same as the state description
-3. public getters
-4. implementation of hashCode & equals
-5. implementation of toString
+1. a record is just another class that extends `java.lang.Record`
+2. records are implicitly immutable
+3. a public all args constructor with signature same as the state description
+4. public getters
+5. implementation of hashCode & equals
+6. implementation of toString
 
 Superb! right?
 
@@ -134,7 +135,7 @@ point1.equals(point2) = true
 
 records do have some restrictions as well
 
-1. they cannot extend any other class
+1. they cannot extend any other class. That's because records implicitly extends `java.lang.Record`
 
 ```java
 record Point(int x, int y) extends SomeClass {}; // Error - not allowed
