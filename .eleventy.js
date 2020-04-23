@@ -1,3 +1,5 @@
+const site = require("./_data/site.js");
+
 module.exports = function (eleventyConfig) {
   let highlightJs = require("highlight.js");
   let markdownIt = require("markdown-it");
@@ -25,6 +27,9 @@ module.exports = function (eleventyConfig) {
 
   eleventyConfig.addLiquidFilter("toUTCString", (date) =>
     new Date(date).toUTCString()
+  );
+  eleventyConfig.addLiquidFilter("pageTitle", (title) =>
+    title ? title + " - " + site.name : site.name
   );
 
   eleventyConfig.addPassthroughCopy({ "css/processed": "css" });
