@@ -13,7 +13,7 @@ date: 2020-04-21
       {{ page.date | toUTCString | date: "%b %d, %Y" }} - 
     </span>
     <span class="font-light text-sm text-gray-600">
-      {{author.name}}
+      {{site.author.name}}
     </span>
   </header>
 </article>

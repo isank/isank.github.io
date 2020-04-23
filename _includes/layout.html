@@ -27,7 +27,7 @@
                 <a href="/">
                   <img
                     class="rounded-full h-8 w-8 lg:h-16 lg:w-16"
-                    src="{{author.picture}}"
+                    src="{{site.author.picture}}"
                     alt="author profile picture"
                   />
                 </a>
@@ -55,9 +55,9 @@
             <div id="menu" class="hidden lg:block">
               <div>
                 <h1 class="font-medium text-xl mt-6">
-                  {{ author.name }}
+                  {{ site.author.name }}
                 </h1>
-                <p class="font-light mt-1">{{ author.bio }}</p>
+                <p class="font-light mt-1">{{ site.author.bio }}</p>
               </div>
               <div>
                 <nav class="font-medium mt-6">
@@ -70,7 +70,7 @@
               </div>
               <div>
                 <ul class="flex mt-6">
-                  {% for account in author.socialAccounts %}
+                  {% for account in site.author.socialAccounts %}
                   <li class="list-none mr-2">
                     <a class="inline-block h-8 w-8" href="{{account.link}}">
                       <svg
