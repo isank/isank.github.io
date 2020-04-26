@@ -31,6 +31,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addLiquidFilter("pageTitle", (title) =>
     title ? title + " - " + site.name : site.name
   );
+  eleventyConfig.addLiquidFilter("pageType", (url) =>
+    url === "/" ? "website" : "article"
+  );
 
   eleventyConfig.addPassthroughCopy({ "css/processed": "css" });
   eleventyConfig.addPassthroughCopy("assets");
