@@ -88,7 +88,9 @@
               <div>
                 <nav class="font-medium mt-6">
                   <ul>
-                    <li class="hover:underline">
+                    <li
+                      class="hover:underline {% if page.url == '/' %} underline {%endif%}"
+                    >
                       <a href="/">Posts</a>
                     </li>
                   </ul>
