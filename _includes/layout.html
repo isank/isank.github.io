@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="/assets/images/favicon.ico" />
     <link rel="canonical" href="{{ site.root }}{{ page.url }}" />
     <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="image_src" href="/assets/images/logo.png" />
+    <link rel="image_src" href="{{ site.root }}/assets/images/logo.png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/ir-black.min.css"
@@ -20,7 +20,10 @@
     <meta property="og:url" content="{{ site.root }}{{ page.url }}" />
     <meta property="og:title" content="{{ title | pageTitle }}" />
     <meta property="og:type" content="{{ page.url | pageType }}" />
-    <meta property="og:image" content="/assets/images/logo.png" />
+    <meta
+      property="og:image"
+      content="{{ site.root }}/assets/images/logo.png"
+    />
     <meta property="og:description" content="{{ description }}" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:creator" content="isank" />
@@ -28,8 +31,11 @@
     <meta itemprop="name" content="{{ title | pageTitle }}" />
     <meta itemprop="url" content="{{ site.root }}{{ page.url }}" />
     <meta itemprop="description" content="{{ description }}" />
-    <meta itemprop="thumbnailUrl" content="/assets/images/logo.png" />
-    <meta itemprop="image" content="/assets/images/logo.png" />
+    <meta
+      itemprop="thumbnailUrl"
+      content="{{ site.root }}/assets/images/logo.png"
+    />
+    <meta itemprop="image" content="{{ site.root }}/assets/images/logo.png" />
     <meta itemprop="author" content="Isank Agarwal" />
     <meta itemprop="datePublished" content="{{ page.date }}" />
     <meta itemprop="headline" content="{{ title | pageTitle }}" />
