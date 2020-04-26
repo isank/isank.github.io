@@ -98,14 +98,11 @@
                 <ul class="flex mt-6">
                   {% for account in site.author.socialAccounts %}
                   <li class="list-none mr-2">
-                    <a class="inline-block h-8 w-8" href="{{account.link}}">
-                      <svg
-                        class="fill-current text-gray-900"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                      >
-                        {{ account.svg }}
-                      </svg>
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="{{account.link}}"
+                    >
+                      {{ account.svg }}
                     </a>
                   </li>
                   {% endfor %}
