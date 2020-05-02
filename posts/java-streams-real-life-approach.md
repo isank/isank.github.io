@@ -112,4 +112,4 @@ List<String> glassOfWater = Stream
 
 ## Conclusion
 
-Now, that's what Streams are in all their glory. They are lot more powerful than you think and I hope after this post you'll appreciate Streams more than just considering then as a new iterator or boilerplate remover.
+Now, that's what Streams are in all their glory. They are a lot more powerful than you think and I hope after this post you'll appreciate Streams more than just considering them as a new iterator or boilerplate remover.
