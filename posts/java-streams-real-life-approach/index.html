@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- prettier-ignore -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-164224450-1"></script>
+    <script src="/js/gtag.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- prettier-ignore -->
+    <title>Streams - a real-life approach - Isank's Blog</title>
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <link rel="canonical" href="https://isank.dev/posts/java-streams-real-life-approach/" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="image_src" href="https://isank.dev/assets/images/logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/ir-black.min.css"
+    />
+    <meta property="og:site_name" content="isank.dev" />
+    <meta property="og:url" content="https://isank.dev/posts/java-streams-real-life-approach/" />
+    <meta property="og:title" content="Streams - a real-life approach - Isank's Blog" />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:image"
+      content="https://isank.dev/assets/images/logo.png"
+    />
+    <meta property="og:description" content="Let's understand Streams with a real-life example" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="isank" />
+    <meta name="description" content="Let's understand Streams with a real-life example" />
+    <meta itemprop="name" content="Streams - a real-life approach - Isank's Blog" />
+    <meta itemprop="url" content="https://isank.dev/posts/java-streams-real-life-approach/" />
+    <meta itemprop="description" content="Let's understand Streams with a real-life example" />
+    <meta
+      itemprop="thumbnailUrl"
+      content="https://isank.dev/assets/images/logo.png"
+    />
+    <meta itemprop="image" content="https://isank.dev/assets/images/logo.png" />
+    <meta itemprop="author" content="Isank Agarwal" />
+    <meta itemprop="datePublished" content="Sat May 02 2020 00:00:00 GMT+0000 (Coordinated Universal Time)" />
+    <meta itemprop="headline" content="Streams - a real-life approach - Isank's Blog" />
+    <meta itemprop="publisher" content="isank.dev" />
+  </head>
+  <body>
+    <div class="flex flex-col lg:flex-row">
+      <div
+        class="w-screen max-w-screen lg:max-w-xs lg:h-screen bg-red-100 fixed lg:relative"
+      >
+        <div class="w-full">
+          <div class="flex flex-col w-full p-4 lg:p-12">
+            <div class="flex flex-row w-full items-center justify-between">
+              <div class="lg:mt-3">
+                <a href="/">
+                  <img
+                    class="rounded-full h-8 w-8 lg:h-16 lg:w-16"
+                    src="/assets/dp/dp.jpg"
+                    alt="author profile picture"
+                  />
+                </a>
+              </div>
+              <button id="menu-show-btn" class="lg:hidden h-6 w-6">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  class=""
+                >
+                  <path
+                    d="M16.4 9H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zm0 4H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1zM3.6 7h12.8c.552 0 .6-.447.6-1 0-.553-.048-1-.6-1H3.6c-.552 0-.6.447-.6 1 0 .553.048 1 .6 1z"
+                  />
+                </svg>
+              </button>
+
+              <button id="menu-hide-btn" class="hidden h-6 w-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path
+                    d="M14.348 14.849a1.2 1.2 0 0 1-1.697 0L10 11.819l-2.651 3.029a1.2 1.2 0 1 1-1.697-1.697l2.758-3.15-2.759-3.152a1.2 1.2 0 1 1 1.697-1.697L10 8.183l2.651-3.031a1.2 1.2 0 1 1 1.697 1.697l-2.758 3.152 2.758 3.15a1.2 1.2 0 0 1 0 1.698z"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div id="menu" class="hidden lg:block">
+              <div>
+                <h1 class="font-medium text-xl mt-6">
+                  Isank
+                </h1>
+                <p class="font-light mt-1">Just another Software Engineer;</p>
+              </div>
+              <div>
+                <nav class="font-medium mt-6">
+                  <ul>
+                    <li
+                      class="hover:underline "
+                    >
+                      <a href="/">Posts</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div>
+                <ul class="flex mt-6">
+                  
+                  <li class="list-none mr-2">
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="https://twitter.com/isank"
+                    >
+                      <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm3.905 7.864c.004.082.005.164.005.244 0 2.5-1.901 5.381-5.379 5.381a5.335 5.335 0 0 1-2.898-.85c.147.018.298.025.451.025.886 0 1.701-.301 2.348-.809a1.895 1.895 0 0 1-1.766-1.312 1.9 1.9 0 0 0 .853-.033 1.892 1.892 0 0 1-1.517-1.854v-.023c.255.141.547.227.857.237a1.89 1.89 0 0 1-.585-2.526 5.376 5.376 0 0 0 3.897 1.977 1.891 1.891 0 0 1 3.222-1.725 3.797 3.797 0 0 0 1.2-.459 1.9 1.9 0 0 1-.831 1.047 3.799 3.799 0 0 0 1.086-.299 3.834 3.834 0 0 1-.943.979z"/></svg>
+                    </a>
+                  </li>
+                  
+                  <li class="list-none mr-2">
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="https://github.com/isank"
+                    >
+                      <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10.015 9.949h-.03c-1.191 0-2.24-.303-2.861.268a1.57 1.57 0 0 0-.527 1.197c0 1.852 1.483 2.08 3.389 2.08h.029c1.905 0 3.389-.229 3.389-2.08 0-.443-.156-.856-.527-1.197-.622-.571-1.671-.268-2.862-.268zM8.393 12.48c-.363 0-.656-.408-.656-.91s.293-.908.656-.908c.363 0 .657.406.657.908.001.502-.293.91-.657.91zm3.213 0c-.363 0-.657-.408-.657-.91s.294-.908.657-.908c.362 0 .656.406.656.908.001.502-.293.91-.656.91zM10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm.876 13.539c-.172 0-.514 0-.876.002-.362-.002-.704-.002-.876-.002-.76 0-3.772-.059-3.772-3.689 0-.834.286-1.445.755-1.955-.074-.184-.078-1.232.32-2.236 0 0 .916.1 2.301 1.051.289-.081.781-.122 1.272-.122s.982.041 1.273.121c1.385-.951 2.301-1.051 2.301-1.051.398 1.004.395 2.053.32 2.236.469.51.755 1.121.755 1.955-.001 3.632-3.013 3.69-3.773 3.69z"/></svg>
+                    </a>
+                  </li>
+                  
+                  <li class="list-none mr-2">
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="https://in.linkedin.com/in/isank"
+                    >
+                      <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zM7.65 13.979H5.706V7.723H7.65v6.256zm-.984-7.024c-.614 0-1.011-.435-1.011-.973 0-.549.409-.971 1.036-.971s1.011.422 1.023.971c0 .538-.396.973-1.048.973zm8.084 7.024h-1.944v-3.467c0-.807-.282-1.355-.985-1.355-.537 0-.856.371-.997.728-.052.127-.065.307-.065.486v3.607H8.814v-4.26c0-.781-.025-1.434-.051-1.996h1.689l.089.869h.039c.256-.408.883-1.01 1.932-1.01 1.279 0 2.238.857 2.238 2.699v3.699z"/></svg>
+                    </a>
+                  </li>
+                  
+                  <li class="list-none mr-2">
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="https://www.instagram.com/isank_a"
+                    >
+                      <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13.498 6.651a1.656 1.656 0 0 0-.95-.949 2.766 2.766 0 0 0-.928-.172c-.527-.024-.685-.03-2.02-.03s-1.493.006-2.02.03a2.766 2.766 0 0 0-.929.172 1.656 1.656 0 0 0-.949.95 2.766 2.766 0 0 0-.172.928c-.024.527-.03.685-.03 2.02s.006 1.493.03 2.02a2.766 2.766 0 0 0 .172.929 1.656 1.656 0 0 0 .95.949 2.766 2.766 0 0 0 .928.172c.527.024.685.029 2.02.029s1.493-.005 2.02-.03a2.766 2.766 0 0 0 .929-.171 1.656 1.656 0 0 0 .949-.95 2.766 2.766 0 0 0 .172-.928c.024-.527.029-.685.029-2.02s-.005-1.493-.03-2.02a2.766 2.766 0 0 0-.171-.929zM9.6 12.168A2.568 2.568 0 1 1 12.168 9.6 2.568 2.568 0 0 1 9.6 12.168zm2.669-4.637a.6.6 0 1 1 .6-.6.6.6 0 0 1-.6.6z"/><circle cx="9.6" cy="9.6" r="1.667"/><path d="M9.6 0a9.6 9.6 0 1 0 9.6 9.6A9.6 9.6 0 0 0 9.6 0zm4.97 11.661a3.67 3.67 0 0 1-.233 1.214 2.556 2.556 0 0 1-1.462 1.462 3.67 3.67 0 0 1-1.213.233c-.534.024-.704.03-2.062.03s-1.528-.006-2.062-.03a3.67 3.67 0 0 1-1.213-.233 2.556 2.556 0 0 1-1.462-1.462 3.67 3.67 0 0 1-.233-1.213c-.024-.534-.03-.704-.03-2.062s.006-1.528.03-2.062a3.67 3.67 0 0 1 .232-1.213 2.556 2.556 0 0 1 1.463-1.463 3.67 3.67 0 0 1 1.213-.232c.534-.024.704-.03 2.062-.03s1.528.006 2.062.03a3.67 3.67 0 0 1 1.213.232 2.556 2.556 0 0 1 1.462 1.463 3.67 3.67 0 0 1 .233 1.213c.024.534.03.704.03 2.062s-.006 1.528-.03 2.062z"/></svg>
+                    </a>
+                  </li>
+                  
+                  <li class="list-none mr-2">
+                    <a
+                      class="inline-block h-8 w-8 text-gray-900 hover:text-blue-600"
+                      href="mailto:isankagarwal@gmail.com"
+                    >
+                      <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zM6.231 7h7.52c.399 0 .193.512-.024.643-.217.13-3.22 1.947-3.333 2.014s-.257.1-.403.1a.793.793 0 0 1-.402-.1L6.255 7.643C6.038 7.512 5.833 7 6.231 7zM14 12.5c0 .21-.252.5-.444.5H6.444C6.252 13 6 12.71 6 12.5V8.853c0-.092-.002-.211.172-.11l3.417 2.015a.69.69 0 0 0 .402.1.69.69 0 0 0 .403-.1l3.434-2.014c.174-.102.172.018.172.11V12.5z"/></svg>
+                    </a>
+                  </li>
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="text-center hidden lg:block">
+            <span
+              class="text-xs text-gray-500 font-hairline subpixel-antialiased"
+            >
+              &copy; 2020 Isank Agarwal. All rights reserved.
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="w-screen max-w-screen lg:h-screen overflow-y-auto">
+        <div
+          class="px-4 pb-4 pt-20 lg:p-12  markdown"
+        >
+          <article class="post-title">
+  <header>
+    <h1 class="font-bold text-gray-900 text-3xl">
+      Streams - a real-life approach
+    </h1>
+    <span class="font-light text-sm text-gray-600">
+      May 02, 2020 - 
+    </span>
+    <span class="font-light text-sm text-gray-600">
+      Isank
+    </span>
+  </header>
+</article>
+<p>Streams were first introduced with Java 8 in 2014. So, they're around 5 years old now. However, many of us still struggle to understand &amp; explain Streams properly. For some, it is just a new way to loop through a list while some think it just reduces the amount of code that we need to write. Although these statements are not incorrect they highly understate the power of Streams. Today we will learn Streams with a couple of things that you all can find in your kitchen i.e a tap, some water, a water purifier, and a glass. I hope you're in your kitchen (with whatever you're reading this post on of course).</p>
+<h2>Stream is data flowing towards you</h2>
+<p>Turn that tap on and the water starts flowing. People, you have a stream and that water is your data. Streams are all about data being pushed to you. Instead of you going to the data (like pulling out water in a bucket from a well) the data itself comes to you. To keep a track of things technically, we will also work with a Stream of Strings which will represent our water stream in code.</p>
+<pre class="hljs"><code><span class="hljs-comment">// a stream of string to represent our water stream with some impurities in it.</span>
+Stream&lt;String&gt; water = Stream.of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"water"</span>); <span class="hljs-comment">// water, water, water, impurity, impurity, water</span>
+</code></pre>
+<h2>Filtering - the <em>filter</em> operation</h2>
+<p>Water from the tap is not considered good to be consumed directly because of impurities just like sometimes we don't want something to be a part of our data. And, here is when a filter (something like a water purifier) comes in to remove anything that we don't want.</p>
+<pre class="hljs"><code>Stream&lt;String&gt; water = Stream.of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"water"</span>); <span class="hljs-comment">// water, water, water, impurity, impurity, water</span>
+
+<span class="hljs-comment">// let's filter out impurities</span>
+Stream&lt;String&gt; pureWater = water.filter(w -&gt; !w.equals(<span class="hljs-string">"impurity"</span>)); <span class="hljs-comment">// water, water, water, water</span>
+</code></pre>
+<h2>Mapping - the <em>map</em> operation</h2>
+<p>We are delicate beings and removing impurities from water is just not enough for us. We also need the water to be injected with RO &amp; other minerals, right? In real life generally, our water purifiers do all these things but for the sake of our example here we will take it as a different operation, a <code>map</code> operation.</p>
+<pre class="hljs"><code>Stream&lt;String&gt; water = Stream.of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"water"</span>);
+
+Stream&lt;String&gt; pureWater = water.filter(w -&gt; !w.equals(<span class="hljs-string">"impurity"</span>)); <span class="hljs-comment">// water, water, water, water</span>
+
+<span class="hljs-comment">// let's add some ro &amp; minerals</span>
+Stream&lt;String&gt; roWater = pureWater.map(w -&gt; <span class="hljs-string">"ro"</span> + w); <span class="hljs-comment">// rowater, rowater, rowater, rowater</span>
+</code></pre>
+<blockquote>
+<p>A very important thing to keep in mind here is that <code>map</code> is a <code>1 to 1</code> operation. A <code>1 to 1</code> operation means one input produces one output. For eg: here every single <code>water</code> is being converted to a single <code>rowater</code></p>
+</blockquote>
+<h2>Flatmapping - the <em>flatMap</em> operation</h2>
+<p>What happens when you pass water through a sprinkler? Yes, it's broken down into droplets. And, that's exactly what a <code>flatMap</code> does to your data.</p>
+<blockquote>
+<p>Unlike the <code>map</code> it is a <code>1 to many</code> operation i.e it produces multiple outputs for a single input.</p>
+</blockquote>
+<pre class="hljs"><code>Stream&lt;String&gt; water = Stream.of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"water"</span>);
+
+Stream&lt;String&gt; pureWater = water.filter(w -&gt; !w.equals(<span class="hljs-string">"impurity"</span>)); <span class="hljs-comment">// water, water, water, water</span>
+
+Stream&lt;Character&gt; droplets = pureWater.flatMap(w -&gt; w.chars().mapToObj(d -&gt; (<span class="hljs-keyword">char</span>) d)); <span class="hljs-comment">// waterwaterwaterwater</span>
+</code></pre>
+<h2>Streams are implicitly <em>lazy</em></h2>
+<p>Now, think about it. Would you turn that tap on, that water purifier on or that sprinkler on, unless &amp; until you need water to store, to cook or to drink? No, right. It does not make sense to do this whole process if you do not have a concrete purpose. That's exactly what Java thinks and thus it chose to keep the Streams lazy. All the code that you see above would do nothing unless you have a specific purpose, something that we call a <code>terminal</code> operation.</p>
+<h2>A <em>Terminal</em> operation is what makes the Streams go</h2>
+<p>In our whole kitchen, tap, water scenario what do you think would be the terminal operation? Collecting the water to a glass (remember, I mentioned that you would need a glass as well). So, unless you want a glass of water you wouldn't turn on anything.</p>
+<blockquote>
+<p>Unlike <code>map</code>, <code>flatMap</code> &amp; <code>filter</code> there is no operation named <code>terminal</code>. However, various operations like <code>collect</code>, <code>forEach</code> etc. are considered to be terminal operations.</p>
+</blockquote>
+<pre class="hljs"><code>Stream&lt;String&gt; water = Stream.of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"water"</span>);
+
+Stream&lt;String&gt; pureWater = water.filter(w -&gt; !w.equals(<span class="hljs-string">"impurity"</span>)); <span class="hljs-comment">// water, water, water, water</span>
+
+Stream&lt;String&gt; roWater = pureWater.map(w -&gt; <span class="hljs-string">"ro"</span> + w); <span class="hljs-comment">// rowater, rowater, rowater, rowater</span>
+
+List&lt;String&gt; glassOfWater = roWater.collect(Collectors.toList()); <span class="hljs-comment">// a terminal operation which will kick off all the Streams above</span>
+</code></pre>
+<p>In the code above, the Streams <code>water</code>, <code>pureWater</code> &amp; <code>roWater</code> will be executed only when the line</p>
+<pre class="hljs"><code>List&lt;String&gt; glassOfWater = roWater.collect(Collectors.toList()); <span class="hljs-comment">// list of rowater, rowater, rowater, rowater</span>
+</code></pre>
+<p>gets executed because that's our terminal operation, that's our concrete purpose to even have all those streams in the first place.</p>
+<h2>Of course, you can have all that code chained</h2>
+<p>Doing something like below is absolutely fine and even recommended. After all, your kitchen also has things attached as well, right.</p>
+<pre class="hljs"><code>List&lt;String&gt; glassOfWater = Stream
+        .of(<span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"water"</span>, <span class="hljs-string">"impurity"</span>, <span class="hljs-string">"impurity"</span>,
+            <span class="hljs-string">"water"</span>) <span class="hljs-comment">// water, water, water, impurity, impurity, water</span>
+        .filter(w -&gt; !w.equals(<span class="hljs-string">"impurity"</span>)) <span class="hljs-comment">// water, water, water, water</span>
+        .map(w -&gt; <span class="hljs-string">"ro"</span> + w) <span class="hljs-comment">// rowater, rowater, rowater, rowater</span>
+        .collect(Collectors.toList()); <span class="hljs-comment">// list of rowater, rowater, rowater, rowater</span>
+</code></pre>
+<h2>Conclusion</h2>
+<p>Now, that's what Streams are in all their glory. They are lot more powerful than you think and I hope after this post you'll appreciate Streams more than just considering then as a new iterator or boilerplate remover.</p>
+
+        </div>
+      </div>
+    </div>
+    <script src="/js/menuToggle.js"></script>
+  </body>
+</html>
