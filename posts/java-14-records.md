@@ -4,20 +4,6 @@ description: A guide to what records (a preview feature) in Java 14 offers
 date: 2020-04-21
 ---
 
-<article class="post-title">
-  <header>
-    <h1 class="font-bold text-gray-900 text-3xl">
-      {{ title }}
-    </h1>
-    <span class="font-light text-sm text-gray-600">
-      {{ page.date | toUTCString | date: "%b %d, %Y" }} - 
-    </span>
-    <span class="font-light text-sm text-gray-600">
-      {{site.author.name}}
-    </span>
-  </header>
-</article>
-
 Java has always been verbose and almost all of us have accepted the fact and are used to its verbosity. We generally take the help of our super-intelligent IDEs or libraries like [lombok](https://projectlombok.org/) to generate most of the boilerplate code.
 
 Still, when it comes down to doing super simple things like creating a data carrier class (which is as dumb as it sounds), a simple DTO or a value object we always feel the need to have something quick and embedded in Java itself.

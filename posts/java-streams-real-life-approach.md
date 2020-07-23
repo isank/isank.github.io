@@ -4,20 +4,6 @@ description: Let's understand Streams with a real-life example
 date: 2020-05-02
 ---
 
-<article class="post-title">
-  <header>
-    <h1 class="font-bold text-gray-900 text-3xl">
-      {{ title }}
-    </h1>
-    <span class="font-light text-sm text-gray-600">
-      {{ page.date | toUTCString | date: "%b %d, %Y" }} - 
-    </span>
-    <span class="font-light text-sm text-gray-600">
-      {{site.author.name}}
-    </span>
-  </header>
-</article>
-
 Streams were first introduced with Java 8 in 2014. So, they're around 5 years old now. However, many of us still struggle to understand & explain Streams properly. For some, it is just a new way to loop through a list while some think it just reduces the amount of code that we need to write. Although these statements are not incorrect they highly understate the power of Streams. Today we will learn Streams with a couple of things that you all can find in your kitchen i.e a tap, some water, a water purifier, and a glass. I hope you're in your kitchen (with whatever you're reading this post on of course).
 
 ## Stream is data flowing towards you
