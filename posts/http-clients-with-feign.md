@@ -332,24 +332,26 @@ import demo.openfeign.user.client.user.UserServiceFactory;
 
 public class App {
 
-    public static void main(String[] args) {
+  private static final String USER_SERVICE_HOST = "http://localhost:8080";
 
-        UserService userService = UserServiceFactory.create("http://localhost:8080");
+  public static void main(String[] args) {
 
-        User newUser = new User();
-        newUser.setName("John");
-        newUser.setAddress("World");
+    UserService userService = UserServiceFactory.create(USER_SERVICE_HOST);
 
-        User addedUser = userService.addUser(newUser);
+    User newUser = new User();
+    newUser.setName("John");
+    newUser.setAddress("World");
 
-        System.out.println("Created new user = " + addedUser);
-        // Created new user = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}
+    User addedUser = userService.addUser(newUser);
+    // Created new user = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}
 
-        User user = userService.getUser(addedUser.getId().toString());
+    System.out.println("Created new user = " + addedUser);
 
-        System.out.println("User = " + user); 
-        // User = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}
-    }
+    User user = userService.getUser(addedUser.getId().toString());
+
+    System.out.println("User = " + user);
+    // User = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}
+  }
 }
 ```
 
