@@ -44,7 +44,7 @@
   <body>
     <div class="flex flex-col lg:flex-row">
       <div
-        class="w-screen max-w-screen lg:max-w-xs lg:h-screen bg-red-100 fixed lg:relative"
+        class="w-screen max-w-screen lg:max-w-xs lg:h-screen bg-red-100 fixed lg:relative print:hidden"
       >
         <div class="w-full">
           <div class="flex flex-col w-full p-4 lg:p-12">
@@ -461,24 +461,26 @@ test {
 
 <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">App</span> </span>{
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String USER_SERVICE_HOST = <span class="hljs-string">"http://localhost:8080"</span>;
 
-        UserService userService = UserServiceFactory.create(<span class="hljs-string">"http://localhost:8080"</span>);
+  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{
 
-        User newUser = <span class="hljs-keyword">new</span> User();
-        newUser.setName(<span class="hljs-string">"John"</span>);
-        newUser.setAddress(<span class="hljs-string">"World"</span>);
+    UserService userService = UserServiceFactory.create(USER_SERVICE_HOST);
 
-        User addedUser = userService.addUser(newUser);
+    User newUser = <span class="hljs-keyword">new</span> User();
+    newUser.setName(<span class="hljs-string">"John"</span>);
+    newUser.setAddress(<span class="hljs-string">"World"</span>);
 
-        System.out.println(<span class="hljs-string">"Created new user = "</span> + addedUser);
-        <span class="hljs-comment">// Created new user = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}</span>
+    User addedUser = userService.addUser(newUser);
+    <span class="hljs-comment">// Created new user = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}</span>
 
-        User user = userService.getUser(addedUser.getId().toString());
+    System.out.println(<span class="hljs-string">"Created new user = "</span> + addedUser);
 
-        System.out.println(<span class="hljs-string">"User = "</span> + user); 
-        <span class="hljs-comment">// User = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}</span>
-    }
+    User user = userService.getUser(addedUser.getId().toString());
+
+    System.out.println(<span class="hljs-string">"User = "</span> + user);
+    <span class="hljs-comment">// User = User{id=5040efa6-5e6e-4d75-af30-30a82b6081d1, name='John', address='World'}</span>
+  }
 }
 </code></pre>
 <p>First, we get an instance to our HTTP client using <code>UserServiceFactory</code> which is actually an instance of <code>UserService</code> from our client module. And, then it becomes just as easy as calling a method on a class to make a network call over HTTP. See,</p>
